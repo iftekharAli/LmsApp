@@ -30,9 +30,9 @@ namespace Common.RequestModel
             {
                 keyword = "";
             }
-       
+            
             Page = 1;
-            keyword = keyword.ToLower();
+          //  keyword = keyword.ToLower();
             if (!string.IsNullOrWhiteSpace(orderBy))
             {
                 orderBy = orderBy;
