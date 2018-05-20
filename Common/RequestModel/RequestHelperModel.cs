@@ -19,20 +19,20 @@ namespace Common.RequestModel
         public string PropertyNameww { get; set; }
         public bool IsAscendingww { get; set; }
     }
-    public abstract  class BaseRequestModel<TModel> where TModel:Entity
+    public   class BaseRequestModel<TModel> where TModel:Entity
     {
         protected const string All = "All";
         protected Expression<Func<TModel, bool>> ExpressionObj = e => true;
 
-        protected BaseRequestModel(string keyword, string orderBy = "Modified", string isAscending = "false")
+        public BaseRequestModel(string keyword, string orderBy = "Modified", string isAscending = "False")
         {
             if (string.IsNullOrEmpty(keyword))
             {
                 keyword = "";
             }
-            
+
             Page = 1;
-          //  keyword = keyword.ToLower();
+           Keyword = keyword.ToLower();
             if (!string.IsNullOrWhiteSpace(orderBy))
             {
                 orderBy = orderBy;
@@ -43,7 +43,7 @@ namespace Common.RequestModel
             }
             Request = new OrderByRequest
             {
-                PropertyName = string.IsNullOrWhiteSpace(orderBy)?"Modified":orderBy,
+                PropertyName = string.IsNullOrWhiteSpace(orderBy) ? "Modified" : orderBy,
                 IsAscending = bool.Parse(isAscending)
             };
         }

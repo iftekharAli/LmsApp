@@ -10,12 +10,17 @@ namespace RequestModel
 {
     public class CourseRequestModel:BaseRequestModel<Course>
     {
+        //public CourseRequestModel() :base("")
+        //{
+            
+        //}
         public CourseRequestModel(string keyword, string orderBy = "Modified", string isAscending = "false") : base(keyword, orderBy, isAscending)
         {
         }
 
         protected override Expression<Func<Course, bool>> GetExpression()
         {
+            Keyword = Keyword.ToLower();
             ExpressionObj = x => x.Name.Contains(Keyword) || x.Topic.Contains(Keyword);
             ExpressionObj =ExpressionObj.And(GenerateBaseEntityExpression());
             return ExpressionObj;
