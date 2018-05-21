@@ -79,7 +79,8 @@ namespace Common.Service
 
         public async Task<Tuple<List<TVm>, int>> SearchAsync(TRm request)
         {
-            IQueryable<T> queryable = Repository.Get(); // 1
+            IQueryable<T> queryableRpository = Repository.Get();
+            IQueryable<T> queryable = queryableRpository; // 1
             var orderedQueryable = request.GetOrderedData(queryable); //3
             int count = orderedQueryable.Count();
             var resultQueryable = request.SkipAndTake(orderedQueryable); //4
